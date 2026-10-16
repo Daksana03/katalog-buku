@@ -15,6 +15,7 @@ return new class extends Migration
         $table->id();
         $table->string('title');   // Judul buku
         $table->string('author');  // Nama penulis
+        $table->integer('year');
         $table->timestamps();      // Otomatis bikin kolom created_at & updated_at
     });
 

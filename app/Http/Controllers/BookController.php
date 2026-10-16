@@ -24,12 +24,13 @@ class BookController extends Controller
         $validated = $request->validate([
             'title'  => 'required|string|max:255',
             'author' => 'required|string|max:255',
+            'year'   => 'required|integer|max255',
         ]);
 
         // Simpan ke database
         Book::create($validated);
 
         // Kembalikan ke halaman daftar buku dengan pesan sukses
-        return to_route('books.index')->with('success', 'Buku berhasil ditambahkan!');
+        return to_route('books.index')->with('suksess', 'Buku berhasil ditambahkan!');
     }
 }

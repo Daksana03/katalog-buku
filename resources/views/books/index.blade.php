@@ -14,16 +14,14 @@
 </head>
 <body>
 
-    <h1Katalog Buku</h1>
+    <h1>Katalog Buku</h1>
 
-    {{-- Munculkan pesan sukses jika ada --}}
     @session('success')
         <div class="alert">{{ $value }}</div>
     @endsession
 
-    {{-- Form Tambah Buku --}}
     <form method="POST" action="{{ route('books.store') }}">
-        @csrf {{-- WAJIB ADA: Token keamanan Laravel agar form tidak dibajak --}}
+        @csrf
 
         <label>Judul Buku:</label>
         <input type="text" name="title" value="{{ old('title') }}" placeholder="Contoh: Filosofi Teras">
@@ -33,16 +31,21 @@
         <input type="text" name="author" value="{{ old('author') }}" placeholder="Contoh: Henry Manampiring">
         @error('author') <div class="error">{{ $message }}</div> @enderror
 
+        {{-- Input Tahun Terbit (Level 2) --}}
+        <label>Tahun Terbit:</label>
+        <input type="number" name="year" value="{{ old('year') }}" placeholder="Contoh: 2018">
+        @error('year') <div class="error">{{ $message }}</div> @enderror
+
         <button type="submit">+ Tambah Buku</button>
     </form>
 
     <hr style="margin: 24px 0;">
 
-    {{-- Daftar Buku --}}
     <h3>Koleksi Saat Ini:</h3>
     <ul>
         @forelse ($books as $book)
-            <li><strong>{{ $book->title }}</strong> oleh {{ $book->author }}</li>
+            {{-- Tampilan Tahun Terbit (Level 3) --}}
+            <li><strong>{{ $book->title }}</strong> oleh {{ $book->author }} ({{ $book->year }})</li>
         @empty
             <li>Belum ada buku. Yuk tambahkan buku pertamamu!</li>
         @endforelse

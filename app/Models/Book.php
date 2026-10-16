@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     // Daftar kolom yang diizinkan untuk diisi pengguna
-    protected $fillable = ['title', 'author'];
+    protected $fillable = ['title', 'author', 'year'];
 }
